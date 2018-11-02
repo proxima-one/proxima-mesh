@@ -31,7 +31,6 @@ The Client API Key looks like the following:
 
 ### Ora Light Client API
 
-
 ## Commands
 
 > A command can be represented through the following JSON:
