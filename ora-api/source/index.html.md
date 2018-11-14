@@ -21,7 +21,89 @@ The Ora Light Client can be used as an endpoint by any client. This can allow fo
 a malleable base structure. Currently, there are no client plug-ins for the Ora Client.
 This means that the only available operations are system operations.
 
-## System Operations
+
+
+## Installing the Ora Client
+
+The Ora Client for javascript can be installed as an npm package. This enables one to set-up a client, and use that client in javascript code.
+
+<code> npm install ora-client <code>
+
+## Initializing the client
+
+The Ora client can then be initialized directly in the javascript code, or through the command line.
+
+
+### Command Line
+
+To create a new client, simply run:
+
+<code>ora-client init new <code>
+
+The response should be in the command, with the public key and private key being added to the environment variables of your application.
+
+(Response)
+
+Once the client is created it can be started by referencing the environment variables.
+
+
+
+
+
+### Javascript
+The client can be added and initialized via javascript
+
+
+
+## Client Actions
+
+### Subscribe
+This is the action for subscribing to different services. The default
+subscriptions for each Ora Client are disputes and the registry service. Further subscriptions can be found through the registry, and updated by actions to the registry.
+
+<code>  <code>
+
+<response>
+
+
+
+
+### Connect
+The connection for the Ora Client is currently maintained centrally
+
+### Register
+This is the first system operation and works as an extension of the
+
+### Dispute
+
+### Trigger
+
+### Create Event ???
+
+### 
+
+
+# Ora Services
+
+## Registry
+
+## Disputes
+
+
+
+
+# Services
+Services
+
+## Subscribing to new services
+
+## Creating services
+
+
+
+
+
+
 
 ### Disputes
 Disputes enable clients to push issues with transactions and requests to the Ora Network.

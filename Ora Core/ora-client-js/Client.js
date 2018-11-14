@@ -10,6 +10,9 @@ var EventStoreClient = require('event-store-client');
 
 this should be the client constructor, it will construct a client key
 */
+
+
+
 function Client(args = {}) {
 
   if (!(this instanceof Client)) {
@@ -21,6 +24,34 @@ function Client(args = {}) {
     - Key generation from private keys
     - HDK gen
     - Privacy
+
+
+
+
+/// These are the data types
+
+    Event {
+    Id: unique event id
+    Stream: the stream that event is published to
+    Service: service that event is using
+    Type: type of event for the process
+    Payload: the data being sent in the message
+    Prev: reference event,
+    Sign: signature of the event by the publisher
+    Meta: any other metadata tags (for instance process, whether it can be disputed, etc)
+    }
+
+
+
+    Participant {
+    System Clout: this will be the reputation of the participant in the Ora ecosystem
+    Stream: this will be the stream that the user writes to.
+    Public key:  this will act as the identifier of the user on the Ora network
+    Private key: this will be used to sign events, and govern the user stream
+    Service Subscriptions: this will be the aggregate and service pathway for updates from the service
+    Plugins: this will be code snippets intended to be triggers for events from services
+    }
+
 
   */
 
