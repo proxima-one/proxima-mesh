@@ -2,8 +2,6 @@
 
 const EC = require('elliptic').ec;
 
-module.exports = Key;
-
 function Key(options = {}) {
   if (!(this instanceof Key)) {
     return new Key(options);

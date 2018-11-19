@@ -12,7 +12,7 @@
 
 
 
-    message Participant {
+    enum Participant {
     System Clout: this will be the reputation of the participant in the Ora ecosystem
     Stream: this will be the stream that the user writes to.
     Public key:  this will act as the identifier of the user on the Ora network

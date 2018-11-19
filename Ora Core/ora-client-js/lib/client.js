@@ -11,19 +11,23 @@ this should be the client constructor, it will construct a client
 
 function Client(key, options = {}) {
   if (!(this instanceof Client)) {
-    return new Client(args);
+    return new Client(key, options);
   }
 
   this.plugins = {}; //plugins and triggers should be preserved
   this.triggers = {}; // this is meant to be a dictionary
 
-  //Check this key 
+  //Check this key
   //want to have this initialized off environoment vars
   const public_api_key = key.publicKey || config.publicKey;
   const private_api_key = key.privateKey || config.privateKey;
 
+
   // Subscribe to receive statistics events (Credentials need to be made to reflect pub/priv keys)
   this.credentials = config.credentials;
+
+  this.publicKey = key.publicKey;
+  this.privateKey = key.privateKey;
 
   this.connection = null;
 
@@ -68,7 +72,9 @@ Client.prototype.sendEvent = function(stream, event, options = {}) {
 Register client
 */
 Client.prototype.register = function(options = {}) {
-  var register_message = this.publicKey; //this.public_key;
+  //participant enum
+
+  var register_message = "Public Key:" + this.publicKey; //this.public_key;
   var register_type = 'register-request';
   var register_stream = 'registry';
   var event = toEvent(EventStoreClient.Connection.createGuid(), register_type, register_message);
