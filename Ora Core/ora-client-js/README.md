@@ -56,6 +56,7 @@ sendMessage()
 ```
 
 name | type | description
+--- | --- | --- 
 serviceName | |  the name of the service being subscribed to
 
 
@@ -74,6 +75,7 @@ subscribe(string serviceName)
 ```
 
 name | type | description
+--- | --- | ---
 serviceName | String | the name of the service being subscribed to
 
 #### Example
