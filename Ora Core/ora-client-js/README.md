@@ -6,13 +6,13 @@ for the Ora service. For further information visit the Ora website at https://ww
 ## Installing the Ora JS Client
 The Ora Client can be installed for NodeJs as an NPM package.
 
-'''
+```
 npm install ora-client
-'''
+```
 
 ## Using the Ora Client
 The Ora client can be utilized to ...
 
-'''javascript
+```javascript
 
-'''
+```
