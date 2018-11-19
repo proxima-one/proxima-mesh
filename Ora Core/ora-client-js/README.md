@@ -28,7 +28,6 @@ Registering can be done as follows.
 client.register();
 ```
 
-
 ## Basic Functions
 Once initialized, the client can use a variety of different functions.
 
@@ -47,27 +46,28 @@ client.close();
 ```
 
 ### Send Message
-Messages can be sent to streams through the Ora service. It should be noted that
-streams can only be written to through ...
+Messages can be sent through the Ora service. It should be noted that
+streams can only be written to if the writer has the proper access. 
 
 #### Schema
 ```
-sendMessage()
+sendMessage(stream, type, message, options = {})
 ```
 
 name | type | description
---- | --- | --- 
-serviceName | |  the name of the service being subscribed to
-
+--- | --- | ---
+stream | String |  the name of the service being subscribed to
+type | String | the type of event that is being processed
+message | Text | the text sent to the stream
 
 #### Example
 
 ```javascript
-client.sendMessage();
+client.sendMessage('my-app', 'user-created', 'username: satoshi' );
 ```
 
 ### Subscribe to services
-Subscription to the Ora
+Subscriptions to services enables message updates, as well as a variety of other projections.
 
 #### Schema
 ```
@@ -86,4 +86,22 @@ client.subscribe('registry');
 ```
 
 ### Add Event Trigger
-At this moment
+At this moment event triggers are used to interact with the service stream subscriptions.
+
+```
+addEventTrigger(string serviceName)
+```
+
+#### Schema
+
+name | type | description
+--- | --- | ---
+serviceName | String | the name of the service that the trigger is attached to
+trigger | function | the function that handles the incoming events
+
+#### Example
+This is a simple example that is attached to the registry service and outputs the type of every new event.
+
+```javascript
+client.addEventTrigger('registry', function(event) {console.log("New event of type: " + event.eventType)};);
+```
