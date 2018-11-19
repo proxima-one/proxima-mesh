@@ -66,8 +66,6 @@ subscriptions for each Ora Client are disputes and the registry service. Further
 <response>
 
 
-
-
 ### Connect
 The connection for the Ora Client is currently maintained centrally
 
@@ -80,7 +78,10 @@ This is the first system operation and works as an extension of the
 
 ### Create Event ???
 
-### 
+###
+
+
+
 
 
 # Ora Services
@@ -88,8 +89,6 @@ This is the first system operation and works as an extension of the
 ## Registry
 
 ## Disputes
-
-
 
 
 # Services
@@ -101,64 +100,14 @@ Services
 
 
 
-
-
-
+# Architectural Components
+While these components are not utilized strictly with the
 
 ### Disputes
 Disputes enable clients to push issues with transactions and requests to the Ora Network.
 These disputes are handled by the Ora Client itself, and reference the service and event
 transaction of the dispute in question.
 
-# Commands
-Ora Client Operations are packaged into generalized commands.
-Commands can be specific to services and chains. This generalization allows for easy
-reuse and powerful extensions.
-
-
-> A command can be represented through the following JSON:
-
-```json
-  {
-  "id": UID,
-  "service": CHAIN,
-  "action": ACTION,
-  "data": ACTION_PAYLOAD
-  }
-
-```
-
-Attribute |  Description
---------- |  -----------
-id | This will be a unique identifier for the command, initially the id will be the transaction hash
-service | This is the chain or service that the command is being sent for
-action | This will identify the specific action being done
-data | The payload used for the action
-
-Commands can be used on the Ora Client as a form of wrapper for transactions and subscriptions.
-Commands are then sent through the Ora network. Once a command is pushed to Ora, the client will be notified of
-updates until the command cycle is completed.
-
-## Transactions
-Transactions are chain-specifc operations that enable the transfer of assets on the blockchain. Transactions, and all actions,
-must be validated by the client itself.
-
-> A transaction is chain-specific, but here is an example payload for Cardano thanks to its API:
-
-```json
-{
-"destinations": [{
-  "amount": 14,
-  "address": "A7k5bz1QR2...Tx561NNmfF"
-}],
-"source": {
-  "accountIndex": 0,
-  "walletId": "Ae2tdPwUPE...8V3AVTnqGZ"
-},
-"spendingPassword": "5416b2988745725998907addf4613c9b0764f04959030e1b81c603b920a115d0"
-}
-
-```
 
 ## Subscriptions
 Subscriptions allow for the tracking of specific addresses on a chain through updates from the

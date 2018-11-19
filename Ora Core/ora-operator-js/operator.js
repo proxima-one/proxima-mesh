@@ -23,6 +23,8 @@ operator.connect();
 operator.subscribe('registry');
 
 
+
+
 function registerRequests(event) {
 //TODO validate transaction
 
