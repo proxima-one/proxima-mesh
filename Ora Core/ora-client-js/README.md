@@ -52,11 +52,11 @@ streams can only be written to through ...
 
 #### Schema
 ```
-*sendMessage*()
+sendMessage()
 ```
 
-|name | description |
-|serviceName| the name of the service being subscribed to|
+name | type | description
+serviceName | |  the name of the service being subscribed to
 
 
 #### Example
@@ -70,11 +70,11 @@ Subscription to the Ora
 
 #### Schema
 ```
-*subscribe*(string serviceName)
+subscribe(string serviceName)
 ```
 
-|name | description |
-|serviceName| the name of the service being subscribed to|
+name | type | description
+serviceName | String | the name of the service being subscribed to
 
 #### Example
 An example of this can be shown when subscribing to the Ora registry service.
