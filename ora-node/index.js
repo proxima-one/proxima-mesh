@@ -7,6 +7,7 @@ const pify = require('pify')
 const assert = require('assert')
 const pull = require('pull-stream')
 const Libp2p = require('libp2p')
+const createNode = require('./lib')
 'use strict'
 
 //configuration defaults
@@ -95,4 +96,4 @@ async sendTo(peer, proto, msg) {
 
 }
 
-module.exports = OraNode
+module.exports = {node: OraNode, lib: createNode}
