@@ -78,7 +78,7 @@ ora peers
 ## Using Ora in an Application
 An Ora node can be used in an application by importing the module.
 
-```
+```javascript
 const {
   Ora,
   OraFactory
@@ -115,7 +115,7 @@ These two nodes should have a client-server interaction. With one node continuou
 
 # Potential
 
-Through Ora it becomes possible to only push data to 
+Through Ora it becomes possible to only push data to
 
 
 
