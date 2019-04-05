@@ -5,8 +5,6 @@
 
 class Registry {
 
-
-
   constructor() {
     this.registry =  {
       "bootstrapers" : [
@@ -21,13 +19,27 @@ class Registry {
       '/ip4/104.236.151.122/tcp/4001/ipfs/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx'
     ]
     }
-    this.client = "/ip4/0.0.0.0/tcp/5900/ipfs/QmcrQZ6RJdpYuGvZqD5QEHAv6qX4BrQLJLQPQUrTrzdcgm"
-    this.server = "/ip4/10.0.0.55/tcp/4900/ipfs/Qma3GsJmB47xYuyahPZPSadh1avvxfyYQwk8R3UnFrQ6aP"
+    //this.server = "/ip4/10.0.0.55/tcp/4900/ipfs/Qma3GsJmB47xYuyahPZPSadh1avvxfyYQwk8R3UnFrQ6aP"
+    this.peers = new Map()
+
+    this.update("QmcrQZ6RJdpYuGvZqD5QEHAv6qX4BrQLJLQPQUrTrzdcgm", "/ip4/0.0.0.0/tcp/5900/ipfs/QmcrQZ6RJdpYuGvZqD5QEHAv6qX4BrQLJLQPQUrTrzdcgm");
+
+
   }
 
   getPeer() {
     return this.client
   }
+
+  getPeers(proto) {
+    return this.peers
+  }
+
+  update(id, info) {
+    this.peers.set(id, info)
+  }
+
+
 
 
 }

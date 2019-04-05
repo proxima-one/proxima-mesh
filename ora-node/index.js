@@ -70,17 +70,18 @@ class OraNode extends EventEmitter {
 */
 async sendTo(peer, proto, msg) {
   assert(this.node.isStarted(), "The node must be started")
-
   try {
     await pify(this.node.dialProtocol).call(this.node, peer, proto, (error, conn) => {
       if (error) {
-        console.log(error)
+        //console.log(error)
         //throw error
         return
       }
-      var data = JSON.stringify(msg) //TODO fix this
+      //var data = JSON.stringify(msg) //TODO fix this
+      //console.log(msg)
+      //var data = bytes("message")
       pull(
-        pull.values([data]),
+        pull.values(msg),
         conn
       )
     })

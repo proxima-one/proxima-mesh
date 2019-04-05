@@ -9,8 +9,8 @@ class CardanoProvider extends EventEmitter {
   constructor(url) {
     super()
     this.url = url || 'http://cardano-explorer.cardano-mainnet.iohk.io'
-    this.interval = 5000
-    this.running = false
+    this.interval = 2000
+    this.running = true
     /*
       Set-up the event handlers...
       onStart() What do you do? nothing??
@@ -30,6 +30,7 @@ class CardanoProvider extends EventEmitter {
           method: 'get',
           url: url
         })
+        //console.log(response.data)
         this.emit('update', response.data)
     } catch (err) {
       console.log(err)

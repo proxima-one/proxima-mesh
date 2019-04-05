@@ -1,0 +1,1 @@
+alias ora="node cli"
