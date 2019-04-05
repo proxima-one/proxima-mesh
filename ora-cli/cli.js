@@ -1,9 +1,9 @@
-
+#!/usr/bin/env node
 const program = require('commander')
-const Ora = require('ora-factory')
-
+//const Ora = require('ora-core')
+const Ora = require('../ora-core/ora-factory')
 const chalk = require('chalk');
-
+const utils = require('../ora-core/utils')
 
 /*
 Create a new client

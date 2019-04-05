@@ -13,10 +13,10 @@ This is the complete version will include:
 const OraNode = require('ora-node').node
 const assert = require('assert')
 const pify = require('pify')
-const Parallel = require('async-parallel')
 const async = require('async')
 const pull  = require('pull-stream')
 const EventEmitter = require('events')
+const Curkel = require('curkel-db')
 
 
 
@@ -41,75 +41,201 @@ class Ora extends EventEmitter {
       -- This is only for Ora (will add peerInfo to registry) (RPC needed?? No)
     */
     this._oraNode.on('ora:connection', (conn) => {
-
-      /*
-        1) parse data from connection
-        2) determine if data is correct
-        3) use appropriate client
-      */
       conn.getPeerInfo((err, peerInfo) => {
         if (err) {
           throw err
         }
-        this._node.connected.set(peerInfo.id.toB58String(), peerInfo)
-        this._oraNode.emit('cardano:connection', conn)
-      })
-
-    })
-
-    this._node.handle('/cardano', (_, conn) => {
-      /*
-        -- Add to registry (If not in registry)
-
-      */
-      this._oraNode.emit('cardano:connection', conn)
-
-      conn.getPeerInfo((err, peerInfo) => {
-        if (err) {
-          throw err
-        }
-        //console.log(peerInfo)
-        //console.log(this._node)
         this._oraNode.connected.set(peerInfo.id.toB58String(), peerInfo)
+        this._registry.update(peerInfo.id.toB58String(), peerInfo)
+        /*
+        Update Clients
+        */
       })
-    })
+  })
 
+//Service library
+this.on('update', (service, data, sender) => {
+        console.log(JSON.stringify(data))
 
-    if (_options.provider) {
-      this.hasProvider = true
-      this._provider = _options.provider
-
-
-
-      this._provider.on('update', (data) => {
-        const peer = this._registry.getPeer()
         var stream = data
-        var data = JSON.stringify(data)
-        this._oraNode.sendTo(peer, '/cardano', stream)
-        this.emit('update', data)
-      })
-    }
+        this.gossip(service, stream, sender);
+});
 
 
-    this._oraNode.on('cardano:connection', (conn) => {
-      /*
-        -- TODO Parse data (RPC)
+}
 
-      */
+addService(serviceName, serviceStruct, serviceHandlers) {
+  //let serviceName = service.serviceName;
+  //bind to server with name of service and handle connections
+  this._node.handle("/" + serviceName, (_, conn) => {
+      conn.getPeerInfo((err, peerInfo) => {
+        if (err) {
+          throw err
+        }
+        this._registry.update(peerInfo.id.toB58String(), peerInfo)
+        this._oraNode.emit(serviceName + ':connection', conn, peerInfo.id.toB58String())
+        this._oraNode.connected.set(peerInfo.id.toB58String(), peerInfo);
+      })});
 
-        pull(
-          conn,
-          pull.collect((err, data) => {
-                console.log(data.toString())
-                this.emit('update', data)
+
+  //handle the data coming in to the server (decode)
+  this._oraNode.on(serviceName + ':connection', (conn, sender) => {
+      //get information and decode
+      pull(
+        conn,
+        pull.collect((err, data) => {
+            this.emit(serviceName + ':update', data, sender)
           }
         )
-      )
+        )
+      });
 
-    })
+  //handler
+  this.on(serviceName + ':update', (serviceName, data, sender) => {
+    //convert to JSON
+    var stream = JSON.parse(data)
+    var stream = JSON.parse(stream)
+    var data = stream.data
+    console.log(data)
+    var eventName = serviceName + ":" + stream.action;
+    console.log(eventName)
+    this.emit(eventName, serviceName, data, sender)
+  });
+
+
+
+
+
+
+
+
+  this.on(serviceName + ':put', (serviceName, data, sender) => {
+    this.put(data.indexName, data.key, data.value, serviceName, sender)
+    //gossip //or decide to
+    //confirmation
+  });
+
+
+
+  this.on(serviceName + ':delete', (serviceName, data, sender) => {
+    this.del(data.indexName, data.key, serviceName, sender)
+    //gossip
+    //respond
+  });
+
+
+
+  this.on(serviceName + ':create', (serviceName, data, sender) => {
+    this.create(data.indexName, serviceName, sender)
+    //gossip depending on replication
+    //respond
+  });
+
+
+
+  this.on(serviceName + ':get', (serviceName, data, sender) => {
+    this.get(data.indexName, data.key, serviceName, sender)
+  });
 
   }
 
+
+/*
+Get change
+*/
+async get(indexName, key, serviceName = "", sender = "") {
+  //Checks
+  var response = await Curkel.get(indexName, key);
+  console.log(response);
+  //response
+  if (sender !== "") {
+    var str = response; //JSON.stringify(response);
+    this.send(sender, service, str);
+  }
+
+  //Broadcasts the same call to everyone
+  var data = {indexName: indexName,
+            key: key}
+  var msg = {service: serviceName, action: 'get', data: data};
+  var stream = JSON.stringify(msg);
+  this.gossip(serviceName, stream, sender); //then
+  console.log("get");
+  //return response;
+  }
+}
+
+/*
+Put
+*/
+async put(indexName, key, value, serviceName = "", sender = "") {
+  var response = await Curkel.put(indexName, key, value)
+  //response
+
+
+  var data = {indexName: indexName,
+            key: key,
+          value: value};
+  var msg = {service: serviceName, action: 'put', data: data};
+  var stream = JSON.stringify(msg);
+  this.gossip(serviceName, stream, sender);
+  console.log("put")
+}
+
+/*
+
+*/
+async del(indexName, key, serviceName = "", sender = "") {
+  var response = await Curkel.delete(indexName, key)
+  //response
+
+
+  var data = {indexName: indexName,
+            key: key}
+  var msg = {service: serviceName, action: 'delete', data: data};
+  var stream = JSON.stringify(msg);
+  this.gossip(serviceName, stream, sender);
+  console.log("delete")
+}
+
+///create...
+async create(indexName, serviceName = "", sender = "") {
+  var response = await Curkel.create(indexName);
+  //respond
+
+
+
+  var data = {indexName: indexName}
+  var msg = {service: serviceName, action: 'create', data: data};
+  var stream = JSON.stringify(msg);
+  console.log("create")
+  console.log("No gossip")
+  //this.gossip(serviceName, stream, sender);
+
+}
+
+
+
+
+send(sender, service, stream) {
+  var peer = this._registry.get(sender);
+  this._oraNode.sendTo(peer, "/" + service, stream);
+}
+
+
+gossip(service, stream, sender=null) {
+    const peers = this._registry.getPeers()
+    console.log(peers)
+    for (const [key, value] of peers.entries()) {
+        if (sender !== key) {
+        this._oraNode.sendTo(value, "/" + service, stream)
+      }
+  }
+}
+
+
+  discover() {
+    this._oraNode.sendTo(this._registry.getPeer(), '/ora', 'ping')
+  }
 
   peers() {
     return this._registry.getPeer()
