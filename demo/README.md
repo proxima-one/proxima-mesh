@@ -128,7 +128,22 @@ These two nodes should have a client-server interaction. With one node continuou
 In this case the result should look something like:
 
 ```JSON
-{"cteId":"ee19839c4330f493e804fd21629e320b73a0f52070b9f5c89f3ddd4d6759828d","cteTimeIssued":1546628651,"cteAmount":{"getCoin":"2042172620987"}},{"cteId":"dff238e84c3177f8d6173b31a39552badd90abe6d6f5e02db35bcb90f2f94e56","cteTimeIssued":1546629411,"cteAmount":{"getCoin":"78817828930"}},{"cteId":"8caa6f0f90c6e8fe71c2ca56d322653d0b826c58c1c9aa27137bc4637a072b0a","cteTimeIssued":1546629411,"cteAmount":{"getCoin":"367109718545"}},{"cteId":"9528e392d76ffeb964ac383e9a5fe7c8ba20abbd227c2febc349802b084952fe","cteTimeIssued":1546629851,"cteAmount":{"getCoin":"1000000106671"}},{"cteId":"50f9f5f30cad77c2cd2f63a66e9b5b8b9988d91dbca498169b4c5bfa7e91d751","cteTimeIssued":1546630531,"cteAmount":{"getCoin":"359500372853"}},{"cteId":"b6825fdd8d6812a37f1c4985253319fc52b49473b2ac31591034259ebaa09988","cteTimeIssued":1546630571,"cteAmount":{"getCoin":"2038032064155"}},{"cteId":"50148e300b2099c435b07e4e2235be18bced5d416a10cf002f49dceaa91c5962","cteTimeIssued":1546630891,"cteAmount":{"getCoin":"2038009733511"}},{"cteId":"047ae12d4bad6dfdfac0594400e272d07e8b2f4dc20bf6006966d0049669fe92","cteTimeIssued":1546631051,"cteAmount":{"getCoin":"43871707"}}
+{"cteId":"ee19839c4330f493e804fd21629e320b73a0f52070b9f5c89f3ddd4d6759828d",
+"cteTimeIssued":1546628651,"cteAmount":{"getCoin":"2042172620987"}},
+{"cteId":"dff238e84c3177f8d6173b31a39552badd90abe6d6f5e02db35bcb90f2f94e56",
+"cteTimeIssued":1546629411,"cteAmount":{"getCoin":"78817828930"}},
+{"cteId":"8caa6f0f90c6e8fe71c2ca56d322653d0b826c58c1c9aa27137bc4637a072b0a",
+"cteTimeIssued":1546629411,"cteAmount":{"getCoin":"367109718545"}},
+{"cteId":"9528e392d76ffeb964ac383e9a5fe7c8ba20abbd227c2febc349802b084952fe",
+"cteTimeIssued":1546629851,"cteAmount":{"getCoin":"1000000106671"}},
+{"cteId":"50f9f5f30cad77c2cd2f63a66e9b5b8b9988d91dbca498169b4c5bfa7e91d751",
+"cteTimeIssued":1546630531,"cteAmount":{"getCoin":"359500372853"}},
+{"cteId":"b6825fdd8d6812a37f1c4985253319fc52b49473b2ac31591034259ebaa09988",
+"cteTimeIssued":1546630571,"cteAmount":{"getCoin":"2038032064155"}},
+{"cteId":"50148e300b2099c435b07e4e2235be18bced5d416a10cf002f49dceaa91c5962",
+"cteTimeIssued":1546630891,"cteAmount":{"getCoin":"2038009733511"}},
+{"cteId":"047ae12d4bad6dfdfac0594400e272d07e8b2f4dc20bf6006966d0049669fe92",
+"cteTimeIssued":1546631051,"cteAmount":{"getCoin":"43871707"}}
 ```
 
 ## Next Steps
