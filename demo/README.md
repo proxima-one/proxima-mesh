@@ -1,7 +1,7 @@
 
 
 
-# Demo: Decentralizing Infura
+# Ora
 
 ## Overview
 
