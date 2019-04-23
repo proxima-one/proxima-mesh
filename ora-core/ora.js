@@ -10,7 +10,7 @@ This is the complete version will include:
  - Just the data not the functions
 */
 
-const OraNode = require('ora-node').node
+const OraNode = require('../ora-node').node
 const assert = require('assert')
 const pify = require('pify')
 const async = require('async')
@@ -161,7 +161,6 @@ async get(indexName, key, serviceName = "", sender = "") {
   this.gossip(serviceName, stream, sender); //then
   console.log("get");
   //return response;
-  }
 }
 
 /*

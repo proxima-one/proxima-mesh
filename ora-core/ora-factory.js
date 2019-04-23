@@ -3,7 +3,7 @@
 Constructs an Ora instance
 */
 
-const oraLib = require('ora-node').lib
+const oraLib = require('../ora-node').lib
 const Ora = require('./ora')
 const assert = require('assert')
 const Libp2p = require('libp2p')

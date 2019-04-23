@@ -1,5 +1,5 @@
 {
-  "name": "ora-node",
+  "name": "ora-demo",
   "version": "1.0.2",
   "description": "An Ora Node for peer-to-peer communication",
   "main": "index.js",
@@ -26,6 +26,7 @@
     "libp2p-railing": "^0.9.2",
     "libp2p-secio": "^0.11.1",
     "libp2p-tcp": "^0.13.0",
+    "ora-node": "^1.0.1",
     "pify": "^4.0.1",
     "pull-stream": "^3.6.9"
   }
