@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@nodeutils/defaults-deep": "^1.1.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "curkel-db": "^1.0.6",
     "libp2p": "^0.25.2",
     "libp2p-bootstrap": "^0.9.7",
